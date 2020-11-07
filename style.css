@@ -1,0 +1,18 @@
+
+* {
+  background-color: salmon;
+
+}
+
+
+li {
+  
+  display: list-item;
+  margin-left: 50px;
+  font-size: 16px;
+}
+
+ul {
+  font-size: 20px;
+  margin-: 100px;
+}
