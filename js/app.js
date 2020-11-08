@@ -8,7 +8,7 @@ console.log(parentElement);
 
 var cookieTable = document.getElementById("cookie-table");
 
-var hours = ["6am", "7am", "8am", "9am", "10am", "11am", "12am", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm"];
+var hours = ["6:00am", "7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00am", "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm"];
 
 // var seattleUl = document.getElementById("seattle");
 // var tokyoUl = document.getElementById("tokyo");
@@ -78,6 +78,22 @@ var dubai = new Store("Dubai", 11, 38, 3.7);
 var paris = new Store("Paris", 20, 38, 2.3);
 var lima = new Store("Lima", 2, 16, 4.6);
 
+function headerCreator() {
+
+  var rowHead = document.createElement('tr');
+  var td = document.createElement('td');
+
+  for (var i = 0; i < hours.length; i++){
+    
+    var th = document.createElement('th');
+    th.textContent = hours[i];
+    rowHead.appendChild(th);
+  }
+
+  cookieTable.appendChild(rowHead);
+}
+
+headerCreator();
 
 seattle.render();
 tokyo.render();
@@ -85,30 +101,38 @@ dubai.render();
 paris.render();
 lima.render();
 
-var trTotal = document.createElement('tr');
+function totalCalculator () {
+var trTotal = document.createElement('tfoot');
 var td = document.createElement('td');
 
-td.textContent = "Totals";
-trTotal.appendChild(td); 
+  td.textContent = "Totals";
+  trTotal.appendChild(td); 
 
-var hourlyTotalForAllStores = [] 
-for (var i = 0; i < seattle.cookiesSoldPerHourArray.length; i++) {
-  
+  var hourlyTotalForAllStores = [] 
+  for (var i = 0; i < seattle.cookiesSoldPerHourArray.length; i++) {
+    
+    td = document.createElement('td');
+    
+    hourlyTotalForAllStores.push(seattle.cookiesSoldPerHourArray[i] + tokyo.cookiesSoldPerHourArray[i] + dubai.cookiesSoldPerHourArray[i] + paris.cookiesSoldPerHourArray[i] + lima.cookiesSoldPerHourArray[i]);
+    
+    td.textContent = hourlyTotalForAllStores[i];
+    
+    trTotal.appendChild(td);
+    
+  }
+
+  var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
+
   td = document.createElement('td');
-  
-  hourlyTotalForAllStores.push(seattle.cookiesSoldPerHourArray[i] + tokyo.cookiesSoldPerHourArray[i] + dubai.cookiesSoldPerHourArray[i] + paris.cookiesSoldPerHourArray[i] + lima.cookiesSoldPerHourArray[i]);
-  td.textContent = this.hourlyTotalForAllStores[i];
+  td.textContent = trueTotal;
   trTotal.appendChild(td);
-  
+
+  cookieTable.appendChild(trTotal);
+
 }
 
-var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
+totalCalculator();
 
-td = document.createElement('td');
-td.textContent = trueTotal;
-trTotal.appendChild(td);
-
-cookieTable.appendChild(trTotal);
 
 //function that adds up all store
 
