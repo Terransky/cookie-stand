@@ -78,17 +78,27 @@ var dubai = new Store("Dubai", 11, 38, 3.7);
 var paris = new Store("Paris", 20, 38, 2.3);
 var lima = new Store("Lima", 2, 16, 4.6);
 
+
+
 function headerCreator() {
 
   var rowHead = document.createElement('tr');
   var td = document.createElement('td');
+  var th = document.createElement('th');
+
+  th.textContent = " ";
+  rowHead.appendChild(th);
 
   for (var i = 0; i < hours.length; i++){
     
-    var th = document.createElement('th');
+    th = document.createElement('th');
     th.textContent = hours[i];
     rowHead.appendChild(th);
   }
+
+  th = document.createElement('th');
+  th.textContent = "Daily Location Total";
+  rowHead.appendChild(th);
 
   cookieTable.appendChild(rowHead);
 }
