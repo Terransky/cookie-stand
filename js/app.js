@@ -10,11 +10,11 @@ var cookieTable = document.getElementById("cookie-table");
 
 var hours = ["6am", "7am", "8am", "9am", "10am", "11am", "12am", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm"];
 
-var seattleUl = document.getElementById("seattle");
-var tokyoUl = document.getElementById("tokyo");
-var dubaiUl = document.getElementById("dubai");
-var parisUl = document.getElementById("paris");
-var limaUl = document.getElementById("lima");
+// var seattleUl = document.getElementById("seattle");
+// var tokyoUl = document.getElementById("tokyo");
+// var dubaiUl = document.getElementById("dubai");
+// var parisUl = document.getElementById("paris");
+// var limaUl = document.getElementById("lima");
 
 
 function Store (city, minCust, maxCust, avgSales){
@@ -25,56 +25,52 @@ function Store (city, minCust, maxCust, avgSales){
   this.customers = 0;
   this.cookiesSoldPerHourArray= [];
   this.dailySalesCounter = 0;
-
+}
   // generation random number of customers, multiply by avgSales, and push each hour's data into cookiesPerHour array.
   // get daily total by storing sum of cookiesPerHour
-  this.randomCustomers = function(){
+Store.prototype.randomCustomers = function(){
     return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
-  };
+};
 
-  this.calcCookiesSoldPerHour = function(){
-    for (var i = 0; i < hours.length; i++){
-      var cookiesPerHour = Math.ceil(this.randomCustomers() * this.avgSales);
-      this.cookiesSoldPerHourArray.push(cookiesPerHour);
-      this.dailySalesCounter += cookiesPerHour; // same as this.dailySalesCounter = this.dailySalesCounter + cookiesPerHour;
+Store.prototype.calcCookiesSoldPerHour = function(){
+  for (var i = 0; i < hours.length; i++){
+    var cookiesPerHour = Math.ceil(this.randomCustomers() * this.avgSales);
+    this.cookiesSoldPerHourArray.push(cookiesPerHour);
+    this.dailySalesCounter += cookiesPerHour; // same as this.dailySalesCounter = this.dailySalesCounter + cookiesPerHour;
 
     }
     console.log("calculate cookies per hour: ", cookiesPerHour);
-  };
+};
   
-  this.render = function(){
+Store.prototype.render = function(){
 
-    // get cookie sold per hour data for table
-    this.calcCookiesSoldPerHour();
+  // get cookie sold per hour data for table
+  this.calcCookiesSoldPerHour();
 
-    //create row
-    var tr = document.createElement("tr");
-    // give row content
-    //create td
-    var td = document.createElement('td');
-    // give td content
-    td.textContent = this.city;
-    //append to row
-    tr.appendChild(td);
-    // create tds for array
-    for (var i = 0; i < this.cookiesSoldPerHourArray.length; i++){
-      td = document.createElement('td');
-      td.textContent = this.cookiesSoldPerHourArray[i];
-      tr.appendChild(td);
-    }
-     
+  //create row
+  var tr = document.createElement("tr");
+  // give row content
+  //create td
+  var td = document.createElement('td');
+  // give td content
+  td.textContent = this.city;
+  //append to row
+  tr.appendChild(td);
+  // create tds for array
+  for (var i = 0; i < this.cookiesSoldPerHourArray.length; i++) {
     td = document.createElement('td');
-    td.textContent = this.minCust;
+    td.textContent = this.cookiesSoldPerHourArray[i];
     tr.appendChild(td);
-
-    cookieTable.appendChild(tr);
-    
-    
   }
 
-  this.render();
-}
+  td = document.createElement('td');
+  td.textContent = this.dailySalesCounter;
+  tr.appendChild(td);
 
+  cookieTable.appendChild(tr);
+
+}
+  
 
 var seattle = new Store("Seattle", 23, 65, 6.3);
 var tokyo = new Store("Tokyo", 3, 24, 1.2);
@@ -83,6 +79,38 @@ var paris = new Store("Paris", 20, 38, 2.3);
 var lima = new Store("Lima", 2, 16, 4.6);
 
 
+seattle.render();
+tokyo.render();
+dubai.render();
+paris.render();
+lima.render();
+
+var trTotal = document.createElement('tr');
+var td = document.createElement('td');
+
+td.textContent = "Totals";
+trTotal.appendChild(td); 
+
+var hourlyTotalForAllStores = [] 
+for (var i = 0; i < seattle.cookiesSoldPerHourArray.length; i++) {
+  
+  td = document.createElement('td');
+  
+  hourlyTotalForAllStores.push(seattle.cookiesSoldPerHourArray[i] + tokyo.cookiesSoldPerHourArray[i] + dubai.cookiesSoldPerHourArray[i] + paris.cookiesSoldPerHourArray[i] + lima.cookiesSoldPerHourArray[i]);
+  td.textContent = this.hourlyTotalForAllStores[i];
+  trTotal.appendChild(td);
+  
+}
+
+var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
+
+td = document.createElement('td');
+td.textContent = trueTotal;
+trTotal.appendChild(td);
+
+cookieTable.appendChild(trTotal);
+
+//function that adds up all store
 
 
 //   // code from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
