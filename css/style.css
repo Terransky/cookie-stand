@@ -1,23 +1,88 @@
 
 * {
-  background-color: salmon;
-
+  background-color: whitesmoke;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 
-li {
-  
-  display: list-item;
-  margin-left: 50px;
-  font-size: 16px;
-}
-
-ul {
-  font-size: 20px;
-  margin-: 100px;
-}
 
 
+/* Sales page */
 td {
+  font-family: Arial, Helvetica, sans-serif;
   border: 1px solid black;
+  padding: 5px;
+
 }
+
+tr {
+  margin-top: 30px;
+}
+
+th {
+  padding: 5px;
+  text-align: center;
+}
+
+#cookie-table {
+  margin-top: 15px;
+}
+
+/* Index page */
+
+header {
+  background-color: salmon;
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+header img, header a, header h1 {
+  background-color: salmon;
+}
+
+header h1 {
+ font-family: 'Tangerine', cursive;
+ text-align: center;
+ font-size: 100px;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+section {
+  text-align: center;
+  width: 15%;
+  margin-top: 30px;
+  border: 1px solid black;
+  padding: 10px;
+  float: left;
+  margin: 20px;
+}
+
+div section:first-child {
+  margin-left: 60px;
+}
+
+#div1 {
+  overflow: auto;
+  background-color: yellow;
+  padding: 15px 15px 15px 15px;
+}
+
+#div1 h2 {
+  text-align: center;
+  font-size: 30px;
+  background: yellow;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+#div2 {
+  float: left;
+  padding: 15px 0px 15px 0px;
+  background-color: #ddd;
+}
+
