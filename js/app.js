@@ -144,6 +144,12 @@ var td = document.createElement('td');
 totalCalculator();
 
 
+
+
+
+
+
+
 //function that adds up all store
 
 
