@@ -111,15 +111,21 @@ dubai.render();
 paris.render();
 lima.render();
 
+// need this outside the calculator function to update the value
+var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
+
 function totalCalculator () {
 var trTotal = document.createElement('tfoot');
+
+trTotal.id = "newRow";
+
 var td = document.createElement('td');
 
   td.textContent = "Totals";
   trTotal.appendChild(td); 
 
   var hourlyTotalForAllStores = [] 
-  for (var i = 0; i < seattle.cookiesSoldPerHourArray.length; i++) {
+  for (var i = 0; i < hours.length; i++) {
     
     td = document.createElement('td');
     
@@ -131,7 +137,7 @@ var td = document.createElement('td');
     
   }
 
-  var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
+  
 
   td = document.createElement('td');
   td.textContent = trueTotal;
@@ -144,7 +150,40 @@ var td = document.createElement('td');
 totalCalculator();
 
 
-//function that adds up all store
+// event handler
+var myForm = document.getElementById("storeform");
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  // target.xxxx. has to be the id in the html
+  var storeName = event.target.storename.value;
+  console.log('store-name: ', storeName);
+
+  var minCust = event.target.mincust.value;
+  var maxCust = event.target.maxcust.value;
+  var avgSales = event.target.avgsales.value;
+  console.log(minCust, maxCust, avgSales);
+
+  var newStore = new Store(storeName, minCust, maxCust, avgSales);
+
+  var newRow = document.getElementById('newRow');
+
+  newStore.render();
+  
+  // after tagging "tfoot" with an ID, this for loop finds it childNodes, casts the strings to integers, 
+  // adds the new store's daily sales to the old sales, and rewrites them to the cell.
+
+  for (var i = 1; i < hours.length + 1; i++){
+    var int = parseInt(newRow.childNodes[i].textContent);
+    var newTotal = int + newStore.cookiesSoldPerHourArray[i-1];
+    newRow.childNodes[i].textContent = newTotal;
+  }
+  
+  
+}
+
+myForm.addEventListener('submit', handleSubmit);
 
 
 //   // code from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -152,11 +191,4 @@ totalCalculator();
 //     this.customers = randomCustomers(this.minCust, this.maxCust);
 //     return Math.floor(Math.random() * (this.maxCust - this.MinCust + 1) + this.MinCust); 
 //     //The maximum is exclusive and the minimum is inclusive
-
-// image example
-
-// var img = documennt.createElement('img');
-// img.setAttribute('src', "foldername/imagename.jpg");
-// img.setAttribute('alt', 'voice line for deaf people')
-// article.appendChild(img);
 
