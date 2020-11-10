@@ -2,19 +2,9 @@
 'use strict' 
 
 
-
-var parentElement = document.getElementById("shop-profiles");
-console.log(parentElement);
-
 var cookieTable = document.getElementById("cookie-table");
 
 var hours = ["6:00am", "7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00am", "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm"];
-
-// var seattleUl = document.getElementById("seattle");
-// var tokyoUl = document.getElementById("tokyo");
-// var dubaiUl = document.getElementById("dubai");
-// var parisUl = document.getElementById("paris");
-// var limaUl = document.getElementById("lima");
 
 
 function Store (city, minCust, maxCust, avgSales){
@@ -39,7 +29,7 @@ Store.prototype.calcCookiesSoldPerHour = function(){
     this.dailySalesCounter += cookiesPerHour; // same as this.dailySalesCounter = this.dailySalesCounter + cookiesPerHour;
 
     }
-    console.log("calculate cookies per hour: ", cookiesPerHour);
+    
 };
   
 Store.prototype.render = function(){
@@ -47,16 +37,11 @@ Store.prototype.render = function(){
   // get cookie sold per hour data for table
   this.calcCookiesSoldPerHour();
 
-  //create row
   var tr = document.createElement("tr");
-  // give row content
-  //create td
   var td = document.createElement('td');
-  // give td content
   td.textContent = this.city;
-  //append to row
   tr.appendChild(td);
-  // create tds for array
+  
   for (var i = 0; i < this.cookiesSoldPerHourArray.length; i++) {
     td = document.createElement('td');
     td.textContent = this.cookiesSoldPerHourArray[i];
@@ -70,15 +55,12 @@ Store.prototype.render = function(){
   cookieTable.appendChild(tr);
 
 }
-  
 
 var seattle = new Store("Seattle", 23, 65, 6.3);
 var tokyo = new Store("Tokyo", 3, 24, 1.2);
 var dubai = new Store("Dubai", 11, 38, 3.7);
 var paris = new Store("Paris", 20, 38, 2.3);
 var lima = new Store("Lima", 2, 16, 4.6);
-
-
 
 function headerCreator() {
 
@@ -111,12 +93,12 @@ dubai.render();
 paris.render();
 lima.render();
 
-// need this outside the calculator function to update the value
-var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
 
 function totalCalculator () {
 var trTotal = document.createElement('tfoot');
+var trueTotal = seattle.dailySalesCounter + tokyo.dailySalesCounter + dubai.dailySalesCounter + paris.dailySalesCounter + lima.dailySalesCounter;
 
+// IDs the trTotal variable as newRow to reference later
 trTotal.id = "newRow";
 
 var td = document.createElement('td');
@@ -158,8 +140,6 @@ function handleSubmit(event) {
 
   // target.xxxx. has to be the id in the html
   var storeName = event.target.storename.value;
-  console.log('store-name: ', storeName);
-
   var minCust = event.target.mincust.value;
   var maxCust = event.target.maxcust.value;
   var avgSales = event.target.avgsales.value;
@@ -167,6 +147,7 @@ function handleSubmit(event) {
 
   var newStore = new Store(storeName, minCust, maxCust, avgSales);
 
+  // assigns the tfoot we IDed above in to this scope
   var newRow = document.getElementById('newRow');
 
   newStore.render();
