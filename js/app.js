@@ -174,13 +174,16 @@ function handleSubmit(event) {
   // after tagging "tfoot" with an ID, this for loop finds it childNodes, casts the strings to integers, 
   // adds the new store's daily sales to the old sales, and rewrites them to the cell.
 
+  var sumTotal = 0;
   for (var i = 1; i < hours.length + 1; i++){
     var int = parseInt(newRow.childNodes[i].textContent);
     var newTotal = int + newStore.cookiesSoldPerHourArray[i-1];
+    sumTotal += newTotal;
     newRow.childNodes[i].textContent = newTotal;
+    
   }
   
-  
+  newRow.childNodes[15].textContent = sumTotal;
 }
 
 myForm.addEventListener('submit', handleSubmit);
