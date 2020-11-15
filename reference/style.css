@@ -1,0 +1,27 @@
+
+body {
+  background-color: rgba(100, 149, 237, .2);
+  text-align: center;
+}
+
+h1 {
+  color: rgb(13, 41, 92);
+}
+
+table {
+  border: 1px solid black;
+  margin: auto;
+}
+
+th {
+  background-color: rgba(100, 149, 237, .75);
+  border: 1px solid black;
+  padding: 5px;
+}
+
+td {
+  background-color: rgba(100, 149, 237, .5);
+  border: 1px solid black;
+  padding: 5px;
+  text-align: right;
+}
