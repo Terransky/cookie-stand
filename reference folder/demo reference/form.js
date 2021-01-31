@@ -7,7 +7,7 @@ function handleSubmit(event) {
 
   // target.xxxx. has to be the id in the html
   var storeName = event.target.storename.value;
-  console.log('store-name: ', storeName);
+  
 
   var minCust = event.target.mincust.value;
   var maxCust = event.target.maxcust.value;

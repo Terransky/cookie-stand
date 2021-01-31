@@ -33,8 +33,8 @@ var cookieForm = document.getElementById('cookieform');
 //       this.hourlySalesArray.push(hourlyCookiesSold);
 //       this.dailyStoreTotal += hourlyCookiesSold;
 //     }
-//     console.log(hourlyCookiesSold);
-//     console.log('inside calc hourly sales');
+//     
+//     
 //   },
   
 //   render: function(){
@@ -48,7 +48,7 @@ var cookieForm = document.getElementById('cookieform');
 //       renderElement('li', `${hours[i]}: ${this.hourlySalesArray[i]} cookies`, seattleList);
 //     }
 
-//     console.log('inside render method');
+//     
 //     renderElement('li', `Total: ${this.dailyStoreTotal} cookies`, seattleList); 
 //   }
   
@@ -79,8 +79,8 @@ Store.prototype.getRandomCust = function() {
       this.hourlySalesArray.push(hourlyCookiesSold);
       this.dailyStoreTotal += hourlyCookiesSold;
     }
-    console.log(hourlyCookiesSold);
-    console.log('inside calc hourly sales');
+    
+    
   };
   
   Store.prototype.render = function(){
@@ -102,7 +102,7 @@ Store.prototype.getRandomCust = function() {
       renderElement('td', this.hourlySalesArray[i], tr);
     }
 
-    console.log('inside render method');
+    
     renderElement('td', this.dailyStoreTotal, tr); 
   };
   

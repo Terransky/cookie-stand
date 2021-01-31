@@ -56,11 +56,11 @@ function calcColumnTotal() {
     let columnTemp = 0;
     for (let j = 0; j < storesArr.length; j++) {
       columnTemp += storesArr[j].cookiesPurchasedPerHourArr[i];
-      console.log(storesArr[j].cookiesPurchasedPerHourArr[i]);
+      
     }
   columnTotal.push(columnTemp);
   }
-  console.log(columnTotal);
+  
 };
 
 
@@ -72,35 +72,39 @@ let dubai = new Store ("Dubai", 11, 38, 3.7);
 let paris = new Store ("Paris", 20, 38, 2.3);
 let lima = new Store ("Lima", 23, 65, 6.3);
 // storesArr.push(seattle, tokyo, dubai, paris, lima);
-console.log(storesArr);
+
 
 
 // table header hours row render
 
-let thead = document.createElement("thead");
-cookieTable.appendChild(thead);
+function makeHeader() {
 
-let tr = document.createElement("tr");
-thead.appendChild(tr);
+  let thead = document.createElement("thead");
+  cookieTable.appendChild(thead);
 
-let th = document.createElement("th");
-th.textContent = " ";
-tr.appendChild(th);
+  let tr = document.createElement("tr");
+  thead.appendChild(tr);
 
-for (let i = 0; i < hours.length; i++) {
   let th = document.createElement("th");
-  th.textContent = hours[i];
+  th.textContent = " ";
   tr.appendChild(th);
-}
 
-th = document.createElement("th");
-th.textContent = "Daily Location Total";
-tr.appendChild(th);
+  for (let i = 0; i < hours.length; i++) {
+    let th = document.createElement("th");
+    th.textContent = hours[i];
+    tr.appendChild(th);
+  }
+
+  th = document.createElement("th");
+  th.textContent = "Daily Location Total";
+  tr.appendChild(th);
+};
+
+makeHeader
+
+// body render
 
 
-// sales render
-
-console.log(storesArr[0].name);
 
 seattle.calcCookiesSoldPerHour();
 seattle.render();
@@ -113,38 +117,42 @@ paris.render();
 lima.calcCookiesSoldPerHour();
 lima.render();
 
-console.log(storesArr[0].cookiesPurchasedPerHourArr[0]);
 
-calcColumnTotal();
-console.log(columnTotal);
+
+
+
 
 // table footer render
 
+function makeFooter() {
+  
+  calcColumnTotal();
+  let tfoot = document.createElement("tfoot");
+  cookieTable.appendChild(tfoot);
 
-let tfoot = document.createElement("tfoot");
-cookieTable.appendChild(tfoot);
+  let tr = document.createElement("tr");
+  tfoot.appendChild(tr);
 
-tr = document.createElement("tr");
-tfoot.appendChild(tr);
-
-let td = document.createElement("td");
-td.textContent = "Totals";
-tr.appendChild(td);
-
-for (let i = 0; i < hours.length; i++) {
-  td = document.createElement("td");
-  td.textContent = columnTotal[i];
+  let td = document.createElement("td");
+  td.textContent = "Totals";
   tr.appendChild(td);
-}
 
-td = document.createElement("td");
-let temp = 0;
-for (let i = 0; i < storesArr.length; i++) {
-  temp += storesArr[i].totalPurchasedCookies;
-}
-td.textContent = temp;
-tr.appendChild(td);
+  for (let i = 0; i < hours.length; i++) {
+    td = document.createElement("td");
+    td.textContent = columnTotal[i];
+    tr.appendChild(td);
+  }
 
+  td = document.createElement("td");
+  let temp = 0;
+  for (let i = 0; i < storesArr.length; i++) {
+    temp += storesArr[i].totalPurchasedCookies;
+  }
+  td.textContent = temp;
+  tr.appendChild(td);
+};
+
+makeFooter();
 
 
 // td = document.createElement("td");

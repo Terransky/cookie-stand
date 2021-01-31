@@ -143,7 +143,7 @@ function handleSubmit(event) {
   var minCust = parseInt(event.target.mincust.value);
   var maxCust = parseInt(event.target.maxcust.value);
   var avgSales = parseInt(event.target.avgsales.value);
-  console.log(minCust, maxCust, avgSales);
+  
 
   var newStore = new Store(storeName, minCust, maxCust, avgSales);
 
