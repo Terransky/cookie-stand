@@ -100,7 +100,7 @@ function makeHeader() {
   tr.appendChild(th);
 };
 
-makeHeader
+makeHeader();
 
 // body render
 
