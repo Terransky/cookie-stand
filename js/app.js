@@ -15,7 +15,6 @@ function Store (name, minHourlyCust, maxHourlyCust, avgCookiesPerCust) {
   this.avgCookiesPerCust = avgCookiesPerCust;
   this.cookiesPurchasedPerHourArr = [];
   this.totalPurchasedCookies = 0;
-  this.dailyTotal = 0;
   storesArr.push(this);
 }
 
@@ -44,9 +43,10 @@ Store.prototype.render = function() {
     tr.appendChild(td);
   }
   td = document.createElement("td");
-  td.textContent = this.dailyTotal;
+  td.textContent = this.totalPurchasedCookies;
   tr.appendChild(td);
 };
+
 
 let columnTotal = [];
 
@@ -61,7 +61,9 @@ function calcColumnTotal() {
   columnTotal.push(columnTemp);
   }
   console.log(columnTotal);
-}
+};
+
+
 
 
 let seattle = new Store ("Seattle", 23, 65, 6.3);
@@ -134,6 +136,16 @@ for (let i = 0; i < hours.length; i++) {
   td.textContent = columnTotal[i];
   tr.appendChild(td);
 }
+
+td = document.createElement("td");
+let temp = 0;
+for (let i = 0; i < storesArr.length; i++) {
+  temp += storesArr[i].totalPurchasedCookies;
+}
+td.textContent = temp;
+tr.appendChild(td);
+
+
 
 // td = document.createElement("td");
 //   for (let i = 0; i < hours.length; i++) {
