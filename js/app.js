@@ -15,6 +15,7 @@ function Store (name, minHourlyCust, maxHourlyCust, avgCookiesPerCust) {
   this.avgCookiesPerCust = avgCookiesPerCust;
   this.cookiesPurchasedPerHourArr = [];
   this.totalPurchasedCookies = 0;
+  this.dailyTotal = 0;
   storesArr.push(this);
 }
 
@@ -22,16 +23,14 @@ Store.prototype.randomCustomers = function() {
   return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 };
 
-Store.prototype.cookiesSold = function() {
-  
-  for (let i = 0; i <= hours.length; i++) {
+Store.prototype.calcCookiesSoldPerHour = function() {
+  for (let i = 0; i < hours.length; i++) {
     this.cookiesPurchasedPerHourArr.push(Math.round((this.randomCustomers() * this.avgCookiesPerCust)));
     this.totalPurchasedCookies += this.cookiesPurchasedPerHourArr[i];
   }
 };
 
 Store.prototype.render = function() {
-
   let tr = document.createElement("tr");
   cookieTable.appendChild(tr);
 
@@ -39,19 +38,22 @@ Store.prototype.render = function() {
   td.textContent = this.name;
   tr.appendChild(td);
 
-  for (let i = 0; i <= hours.length; i++) {
+  for (let i = 0; i < hours.length; i++) {
     let td = document.createElement("td");
     td.textContent = this.cookiesPurchasedPerHourArr[i];
     tr.appendChild(td);
   }
+  td = document.createElement("td");
+  td.textContent = this.dailyTotal;
+  tr.appendChild(td);
 };
 
 let columnTotal = [];
 
-
-function calcFullTotal() {
-  let columnTemp = 0;
-  for (let i = 0; i <= hours.length; i++) {
+function calcColumnTotal() {
+  
+  for (let i = 0; i < hours.length; i++) {
+    let columnTemp = 0;
     for (let j = 0; j < storesArr.length; j++) {
       columnTemp += storesArr[j].cookiesPurchasedPerHourArr[i];
       console.log(storesArr[j].cookiesPurchasedPerHourArr[i]);
@@ -83,7 +85,7 @@ let th = document.createElement("th");
 th.textContent = " ";
 tr.appendChild(th);
 
-for (let i = 0; i <= hours.length; i++) {
+for (let i = 0; i < hours.length; i++) {
   let th = document.createElement("th");
   th.textContent = hours[i];
   tr.appendChild(th);
@@ -98,20 +100,20 @@ tr.appendChild(th);
 
 console.log(storesArr[0].name);
 
-seattle.cookiesSold();
+seattle.calcCookiesSoldPerHour();
 seattle.render();
-tokyo.cookiesSold();
+tokyo.calcCookiesSoldPerHour();
 tokyo.render();
-dubai.cookiesSold();
+dubai.calcCookiesSoldPerHour();
 dubai.render();
-paris.cookiesSold();
+paris.calcCookiesSoldPerHour();
 paris.render();
-lima.cookiesSold();
+lima.calcCookiesSoldPerHour();
 lima.render();
 
 console.log(storesArr[0].cookiesPurchasedPerHourArr[0]);
 
-calcFullTotal();
+calcColumnTotal();
 console.log(columnTotal);
 
 // table footer render
@@ -127,14 +129,14 @@ let td = document.createElement("td");
 td.textContent = "Totals";
 tr.appendChild(td);
 
-for (let i = 0; i <= hours.length; i++) {
+for (let i = 0; i < hours.length; i++) {
   td = document.createElement("td");
   td.textContent = columnTotal[i];
   tr.appendChild(td);
 }
 
 // td = document.createElement("td");
-//   for (let i = 0; i <= hours.length; i++) {
+//   for (let i = 0; i < hours.length; i++) {
 //     td.textContent += columnTotal[i];
 //   }
 // tr.appendChild(td);
@@ -162,9 +164,9 @@ for (let i = 0; i <= hours.length; i++) {
 //     return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 //   },
 
-//   cookiesSoldAndRender: function () {
+//   calcCookiesSoldPerHourAndRender: function () {
     
-//     for (let i = 0; i <= hours.length; i++) {
+//     for (let i = 0; i < hours.length; i++) {
 
 //     seattle.cookiesPurchasedPerHourArr.push(Math.round((seattle.randomCustomers() * seattle.avgCookiesPerCust)));
 //     seattle.totalPurchasedCookies += seattle.cookiesPurchasedPerHourArr[i];
@@ -200,9 +202,9 @@ for (let i = 0; i <= hours.length; i++) {
 //     return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 //   },
 
-//   cookiesSoldAndRender: function () {
+//   calcCookiesSoldPerHourAndRender: function () {
     
-//     for (let i = 0; i <= hours.length; i++) {
+//     for (let i = 0; i < hours.length; i++) {
 
 //     tokyo.cookiesPurchasedPerHourArr.push(Math.round((tokyo.randomCustomers() * tokyo.avgCookiesPerCust)));
 //     tokyo.totalPurchasedCookies += tokyo.cookiesPurchasedPerHourArr[i];
@@ -230,9 +232,9 @@ for (let i = 0; i <= hours.length; i++) {
 //     return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 //   },
 
-//   cookiesSoldAndRender: function () {
+//   calcCookiesSoldPerHourAndRender: function () {
     
-//     for (let i = 0; i <= hours.length; i++) {
+//     for (let i = 0; i < hours.length; i++) {
 
 //     dubai.cookiesPurchasedPerHourArr.push(Math.round((dubai.randomCustomers() * dubai.avgCookiesPerCust)));
 //     dubai.totalPurchasedCookies += dubai.cookiesPurchasedPerHourArr[i];
@@ -260,9 +262,9 @@ for (let i = 0; i <= hours.length; i++) {
 //     return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 //   },
 
-//   cookiesSoldAndRender: function () {
+//   calcCookiesSoldPerHourAndRender: function () {
     
-//     for (let i = 0; i <= hours.length; i++) {
+//     for (let i = 0; i < hours.length; i++) {
 
 //     paris.cookiesPurchasedPerHourArr.push(Math.round((paris.randomCustomers() * paris.avgCookiesPerCust)));
 //     paris.totalPurchasedCookies += paris.cookiesPurchasedPerHourArr[i];
@@ -290,9 +292,9 @@ for (let i = 0; i <= hours.length; i++) {
 //     return Math.floor(Math.random() * (this.maxHourlyCust - this.minHourlyCust + 1) + this.minHourlyCust);
 //   },
 
-//   cookiesSoldAndRender: function () {
+//   calcCookiesSoldPerHourAndRender: function () {
     
-//     for (let i = 0; i <= hours.length; i++) {
+//     for (let i = 0; i < hours.length; i++) {
 
 //     lima.cookiesPurchasedPerHourArr.push(Math.round((lima.randomCustomers() * lima.avgCookiesPerCust)));
 //     lima.totalPurchasedCookies += lima.cookiesPurchasedPerHourArr[i];
@@ -308,8 +310,8 @@ for (let i = 0; i <= hours.length; i++) {
 //   },
 // }
 
-// seattle.cookiesSoldAndRender();
-// tokyo.cookiesSoldAndRender();
-// dubai.cookiesSoldAndRender();
-// paris.cookiesSoldAndRender();
-// lima.cookiesSoldAndRender();
+// seattle.calcCookiesSoldPerHourAndRender();
+// tokyo.calcCookiesSoldPerHourAndRender();
+// dubai.calcCookiesSoldPerHourAndRender();
+// paris.calcCookiesSoldPerHourAndRender();
+// lima.calcCookiesSoldPerHourAndRender();
