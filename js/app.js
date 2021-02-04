@@ -155,6 +155,9 @@ function makeFooter() {
 makeFooter();
 
 
+console.log(storesArr);
+
+
 // td = document.createElement("td");
 //   for (let i = 0; i < hours.length; i++) {
 //     td.textContent += columnTotal[i];
