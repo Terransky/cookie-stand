@@ -16,6 +16,8 @@ function Store (name, minHourlyCust, maxHourlyCust, avgCookiesPerCust) {
   this.cookiesPurchasedPerHourArr = [];
   this.totalPurchasedCookies = 0;
   storesArr.push(this);
+  this.calcCookiesSoldPerHour();
+  this.render();
 }
 
 Store.prototype.randomCustomers = function() {
@@ -66,14 +68,6 @@ function calcColumnTotal() {
 
 
 
-let seattle = new Store ("Seattle", 23, 65, 6.3);
-let tokyo = new Store ("Tokyo", 3, 24, 1.2);
-let dubai = new Store ("Dubai", 11, 38, 3.7);
-let paris = new Store ("Paris", 20, 38, 2.3);
-let lima = new Store ("Lima", 23, 65, 6.3);
-// storesArr.push(seattle, tokyo, dubai, paris, lima);
-
-
 
 // table header hours row render
 
@@ -104,18 +98,23 @@ makeHeader();
 
 // body render
 
+let seattle = new Store ("Seattle", 23, 65, 6.3);
+let tokyo = new Store ("Tokyo", 3, 24, 1.2);
+let dubai = new Store ("Dubai", 11, 38, 3.7);
+let paris = new Store ("Paris", 20, 38, 2.3);
+let lima = new Store ("Lima", 23, 65, 6.3);
 
 
-seattle.calcCookiesSoldPerHour();
-seattle.render();
-tokyo.calcCookiesSoldPerHour();
-tokyo.render();
-dubai.calcCookiesSoldPerHour();
-dubai.render();
-paris.calcCookiesSoldPerHour();
-paris.render();
-lima.calcCookiesSoldPerHour();
-lima.render();
+// seattle.calcCookiesSoldPerHour();
+// seattle.render();
+// tokyo.calcCookiesSoldPerHour();
+// tokyo.render();
+// dubai.calcCookiesSoldPerHour();
+// dubai.render();
+// paris.calcCookiesSoldPerHour();
+// paris.render();
+// lima.calcCookiesSoldPerHour();
+// lima.render();
 
 
 
