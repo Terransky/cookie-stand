@@ -175,5 +175,9 @@ function handleSubmit(event) {
   
 
   let newStore = new Store(storeName, minCust, maxCust, avgSales);
-
+  newStore.render();
 }
+myForm.addEventListener('submit', handleSubmit);
+
+
+// todo: still need a way to create new store and add in the row above the footer, then update the nodes in the footer row
